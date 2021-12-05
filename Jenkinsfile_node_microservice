@@ -11,33 +11,53 @@ pipeline {
         }
         stage('deploy-dev') {
             steps {
-                echo "Deploying on DEV"
+                script {
+                    deploy('DEV')
+                }
             }
         }
         stage('test-dev') {
             steps {
-                echo "Testing on DEV"
+                script {
+                    test('DEV')
+                }
             }
         }
          stage('deploy-int') {
             steps {
-                echo "Deploying on INT"
+                 script {
+                    deploy('INT')
+                }
             }
         }
         stage('test-int') {
             steps {
-                echo "Testing on INT"
+                script {
+                    test('INT')
+                }
             }
         }
         stage('deploy-prod') {
             steps {
-                echo "Deploying on PROD"
+                 script {
+                    deploy('PROD')
+                }
             }
         }
         stage('test-prod') {
             steps {
-                echo "Testing on PROD"
+                script {
+                    test('PROD')
+                }
             }
         }
     }
+}
+
+def deploy(String environment) {
+    echo "Deployment on ${environment} triggered..."
+}
+
+def test(String environment) {
+    echo "Running test on ${environment}"
 }
